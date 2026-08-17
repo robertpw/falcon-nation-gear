@@ -30,8 +30,6 @@ function setup() {
   var orders = ss.getSheetByName(ORDERS_SHEET) || ss.insertSheet(ORDERS_SHEET);
   orders.clear();
   orders.appendRow(['Timestamp', 'Order ID', 'Name', 'Player Name', 'Email', 'Phone', 'Total', 'Paid', 'Notes']);
-  var checkboxRule = SpreadsheetApp.newDataValidation().requireCheckbox().build();
-  orders.getRange(2, 8, 998, 1).setDataValidation(checkboxRule);
   orders.setFrozenRows(1);
   orders.autoResizeColumns(1, 9);
 
@@ -61,6 +59,9 @@ function doPost(e) {
     false,
     ''
   ]);
+  var newOrderRow = ordersSheet.getLastRow();
+  var checkboxRule = SpreadsheetApp.newDataValidation().requireCheckbox().build();
+  ordersSheet.getRange(newOrderRow, 8).setDataValidation(checkboxRule);
 
   (data.items || []).forEach(function (item) {
     itemsSheet.appendRow([

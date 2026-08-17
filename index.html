@@ -753,7 +753,9 @@
 
   function renderConfirmation(data) {
     var note = CONFIG.teamName + " Gear - " + data.lastName + " (" + data.orderId + ")";
-    var venmoUrl = "venmo://paycharge?txn=pay&recipients=" + encodeURIComponent(CONFIG.venmoHandle) +
+    var isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    var venmoBase = isMobileDevice ? "venmo://paycharge?" : "https://venmo.com/?";
+    var venmoUrl = venmoBase + "txn=pay&recipients=" + encodeURIComponent(CONFIG.venmoHandle) +
       "&amount=" + data.total.toFixed(2) + "&note=" + encodeURIComponent(note) + "&audience=private";
 
     var itemsHtml = "";

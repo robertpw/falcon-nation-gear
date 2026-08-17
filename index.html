@@ -753,7 +753,7 @@
 
   function renderConfirmation(data) {
     var note = CONFIG.teamName + " Gear - " + data.lastName + " (" + data.orderId + ")";
-    var venmoUrl = "https://venmo.com/?txn=pay&recipients=" + encodeURIComponent(CONFIG.venmoHandle) +
+    var venmoUrl = "venmo://paycharge?txn=pay&recipients=" + encodeURIComponent(CONFIG.venmoHandle) +
       "&amount=" + data.total.toFixed(2) + "&note=" + encodeURIComponent(note) + "&audience=private";
 
     var itemsHtml = "";
